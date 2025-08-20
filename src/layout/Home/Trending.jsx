@@ -77,7 +77,7 @@ const Trending = () => {
                     src={
                       item.product_image_collection[0].startsWith("http")
                         ? item.product_image_collection[0]
-                        : `http://localhost:4000/uploads/${item.product_image_collection[0]}`
+                        : `https://atal-dashboard-backend.onrender.com/uploads/${item.product_image_collection[0]}`
                     }
                     alt={item.product_name}
                     className="w-full h-36 object-contain mb-4 hover:scale-105"
