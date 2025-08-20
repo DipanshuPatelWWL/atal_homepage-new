@@ -33,8 +33,8 @@ const Cartpage = () => {
       const prod = res.data.product || {};
       setProduct(prod);
       if (prod.product_image_collection?.length > 0) {
-        setMainImage(`http://localhost:4000/uploads/${prod.product_image_collection[0]}`);
-        setGalleryImages(prod.product_image_collection.map(img => `http://localhost:4000/uploads/${img}`));
+        setMainImage(`https://atal-dashboard-backend.onrender.com/uploads/${prod.product_image_collection[0]}`);
+        setGalleryImages(prod.product_image_collection.map(img => `https://atal-dashboard-backend.onrender.com/uploads/${img}`));
       }
     } catch (err) {
       console.error("Failed to fetch products:", err);
@@ -166,7 +166,7 @@ const Cartpage = () => {
         <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="text-center">
             <img
-              src={`http://localhost:4000/uploads/${product.product_lens_image1}`}
+              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image1}`}
               alt={product.product_lens_title1}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
@@ -176,7 +176,7 @@ const Cartpage = () => {
 
           <div className="text-center">
             <img
-              src={`http://localhost:4000/uploads/${product.product_lens_image2}`}
+              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image2}`}
               alt={product.product_lens_title2}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
