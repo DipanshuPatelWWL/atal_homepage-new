@@ -9,7 +9,7 @@ import Insurance from "./Insurance";
 import { useLocation } from 'react-router-dom';
 import { useEffect } from "react";
 import API from "../../API/Api";
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
 
 const Cartpage = () => {
@@ -62,26 +62,34 @@ const Cartpage = () => {
 
 
           {mainImage && (
-            <div className="w-[500px] mx-auto mt-10">
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: product.product_name,
-                    isFluidWidth: true,
-                    src: mainImage,
-                  },
-                  largeImage: {
-                    src: mainImage,
-                    width: 1000,
-                    height: 500,
-                  },
-                  enlargedImageContainerDimensions: {
-                    width: "125%",
-                    height: "160%",
-                  },
-                  isHintEnabled: true,
-                  shouldUsePositiveSpaceLens: true,
-                }}
+            // <div className="w-[500px] mx-auto mt-10">
+            //   <img
+            //     {...{
+            //       smallImage: {
+            //         alt: product.product_name,
+            //         isFluidWidth: true,
+            //         src: mainImage,
+            //       },
+            //       largeImage: {
+            //         src: mainImage,
+            //         width: 1000,
+            //         height: 500,
+            //       },
+            //       enlargedImageContainerDimensions: {
+            //         width: "125%",
+            //         height: "160%",
+            //       },
+            //       isHintEnabled: true,
+            //       shouldUsePositiveSpaceLens: true,
+            //     }}
+            //   />
+            // </div>
+
+            <div className="flex-1 border-r-1 border-black">
+              <img
+                src={mainImage}
+                alt="Ray-Ban Glasses"
+                className="w-full mx-auto mt-10 hover:cursor-pointer"
               />
             </div>
           )}
