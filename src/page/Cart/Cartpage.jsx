@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import API from "../../API/Api";
 // import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 const Cartpage = () => {
   const location = useLocation()
@@ -33,8 +34,8 @@ const Cartpage = () => {
       const prod = res.data.product || {};
       setProduct(prod);
       if (prod.product_image_collection?.length > 0) {
-        setMainImage(`https://atal-dashboard-backend.onrender.com/uploads/${prod.product_image_collection[0]}`);
-        setGalleryImages(prod.product_image_collection.map(img => `https://atal-dashboard-backend.onrender.com/uploads/${img}`));
+        setMainImage(`${Image_Url + prod.product_image_collection[0]}`);
+        setGalleryImages(prod.product_image_collection.map(img => `${Image_Url + img}`));
       }
     } catch (err) {
       console.error("Failed to fetch products:", err);
@@ -62,29 +63,6 @@ const Cartpage = () => {
 
 
           {mainImage && (
-            // <div className="w-[500px] mx-auto mt-10">
-            //   <img
-            //     {...{
-            //       smallImage: {
-            //         alt: product.product_name,
-            //         isFluidWidth: true,
-            //         src: mainImage,
-            //       },
-            //       largeImage: {
-            //         src: mainImage,
-            //         width: 1000,
-            //         height: 500,
-            //       },
-            //       enlargedImageContainerDimensions: {
-            //         width: "125%",
-            //         height: "160%",
-            //       },
-            //       isHintEnabled: true,
-            //       shouldUsePositiveSpaceLens: true,
-            //     }}
-            //   />
-            // </div>
-
             <div className="flex-1 border-r-1 border-black">
               <img
                 src={mainImage}
@@ -174,7 +152,7 @@ const Cartpage = () => {
         <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="text-center">
             <img
-              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image1}`}
+              src={`${Image_Url + product.product_lens_image1}`}
               alt={product.product_lens_title1}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
@@ -184,7 +162,7 @@ const Cartpage = () => {
 
           <div className="text-center">
             <img
-              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image2}`}
+              src={`${Image_Url + product.product_lens_image2}`}
               alt={product.product_lens_title2}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
