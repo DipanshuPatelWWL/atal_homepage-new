@@ -13,9 +13,6 @@ const Trending = () => {
   const fetchReviews = async () => {
     try {
       const res = await API.get("/getProducts/currently trending/trending");
-      console.log('====================================');
-      console.log(res);
-      console.log('====================================');
       setReviews(res.data || []);
     } catch (err) {
       console.error("Failed to fetch reviews:", err);

@@ -12,6 +12,7 @@ import API from "../../API/Api";
 // import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
 const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
+// const Image_Url = "http://localhost:4000/uploads/";
 
 const Cartpage = () => {
   const location = useLocation()
