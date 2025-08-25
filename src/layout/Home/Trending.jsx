@@ -5,13 +5,17 @@ import { useState } from "react";
 import { useEffect } from "react";
 import API from "../../API/Api";
 import { Link } from "react-router-dom";
+const Image_Url= "http://localhost:4000/uploads/"
 
 const Trending = () => {
   const [reviews, setReviews] = useState([{}]);
   const fetchReviews = async () => {
     try {
       const res = await API.get("/getProducts/currently trending/trending");
+      // console.log(res);
+      
       setReviews(res.data || []);
+      // console.log(res.data)
     } catch (err) {
       console.error("Failed to fetch reviews:", err);
     }
@@ -57,12 +61,16 @@ const Trending = () => {
         <h2 className="text-2xl md:text-3xl font-bold text-black ml-2">
           Currently Trending
         </h2>
-        <button className="flex items-center gap-4 text-white font-medium bg-red-600 px-4 py-2 rounded mr-1 hover:bg-black transition-colors duration-300">
+        <Link to="/allproduct" 
+        state={{category:reviews[0].cat_sec,
+        subcategory:reviews[0].subCategoryName}}>
+        <button className="flex items-center gap-4 text-white font-medium bg-red-600 px-4 py-2 rounded mr-1 hover:bg-black transition-colors duration-300 hover:cursor-pointer">
           FIND MORE
           <span className="bg-white text-black p-1 rounded-full">
             <FiArrowRight size={16} className="hover:rotate-[-40deg]" />
           </span>
         </button>
+        </Link>
       </div>
 
       <Slider {...settings}>
@@ -76,7 +84,7 @@ const Trending = () => {
                     src={
                       item.product_image_collection[0].startsWith("http")
                         ? item.product_image_collection[0]
-                        : `https://atal-dashboard-backend.onrender.com/uploads/${item.product_image_collection[0]}`
+                        : `${Image_Url + item.product_image_collection[0]}`
                     }
                     alt={item.product_name}
                     className="w-full h-36 object-contain mb-4 hover:scale-105"

@@ -18,6 +18,7 @@ import Faq from "./components/Faq";
 import About from "./components/About";
 import CustHome from "./components/CustHome";
 import ViewCart from "./page/Cart/ViewCart";
+import Product from "./page/allproduct/Product";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cartpage />,
+      },
+      {
+        path: "/allproduct",
+        element: <Product/>,
       },
       {
         path: "/disclaimer",

@@ -6,14 +6,15 @@ import Color from "./Color";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import Insurance from "./Insurance";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import API from "../../API/Api";
 // import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
+const Image_Url = "http://localhost:4000/uploads/";
 
 const Cartpage = () => {
-  const location = useLocation()
+  const location = useLocation();
   const { ID } = location.state;
   const [product, setProduct] = useState({});
   const [mainImage, setMainImage] = useState(null);
@@ -33,8 +34,15 @@ const Cartpage = () => {
       const prod = res.data.product || {};
       setProduct(prod);
       if (prod.product_image_collection?.length > 0) {
-        setMainImage(`https://atal-dashboard-backend.onrender.com/uploads/${prod.product_image_collection[0]}`);
-        setGalleryImages(prod.product_image_collection.map(img => `https://atal-dashboard-backend.onrender.com/uploads/${img}`));
+        setMainImage(
+          `${Image_Url + prod.product_image_collection[0]}`
+        );
+        setGalleryImages(
+          prod.product_image_collection.map(
+            (img) =>
+              `${Image_Url + img}`
+          )
+        );
       }
     } catch (err) {
       console.error("Failed to fetch products:", err);
@@ -53,13 +61,13 @@ const Cartpage = () => {
                 <img
                   src={img}
                   alt={`frame-${index}`}
-                  className={`w-[100px] hover:cursor-pointer rounded ${mainImage === img ? "ring-2 ring-green-700" : ""
-                    }`}
+                  className={`w-[100px] hover:cursor-pointer rounded ${
+                    mainImage === img ? "ring-2 ring-green-700" : ""
+                  }`}
                 />
               </button>
             ))}
           </div>
-
 
           {mainImage && (
             // <div className="w-[500px] mx-auto mt-10">
@@ -98,7 +106,9 @@ const Cartpage = () => {
           <div className="flex-1 space-y-4 mr-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-3xl font-semibold capitalize">{product.product_name}</h2>
+                <h2 className="text-3xl font-semibold capitalize">
+                  {product.product_name}
+                </h2>
                 <p className="text text-gray-600">{product.product_sku}</p>
               </div>
               <div className="text-3xl font-semibold">
@@ -159,36 +169,53 @@ const Cartpage = () => {
       <div className="mt-6 ml-10">
         <h3 className="text-2xl font-semibold mb-6">ABOUT THIS PRODUCT</h3>
         <ul className="text-lg space-y-1">
-          <li><strong>Frame Material: </strong>{product.product_frame_material}</li>
-          <li><strong>Frame Shape: </strong>{product.product_frame_shape}</li>
-          <li><strong>Frame Colour: </strong>{product.product_frame_color}</li>
-          <li><strong>Fit: </strong>{product.product_frame_fit}</li>
-          <li><strong>Gender: </strong>{product.gender}</li>
+          <li>
+            <strong>Frame Material: </strong>
+            {product.product_frame_material}
+          </li>
+          <li>
+            <strong>Frame Shape: </strong>
+            {product.product_frame_shape}
+          </li>
+          <li>
+            <strong>Frame Colour: </strong>
+            {product.product_frame_color}
+          </li>
+          <li>
+            <strong>Fit: </strong>
+            {product.product_frame_fit}
+          </li>
+          <li>
+            <strong>Gender: </strong>
+            {product.gender}
+          </li>
         </ul>
-        <p className="mt-4 text-lg">
-          {product.product_description}
-        </p>
+        <p className="mt-4 text-lg">{product.product_description}</p>
       </div>
       {/* Lenses Info */}
       <div className="py-12">
         <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="text-center">
             <img
-              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image1}`}
+              src={`${Image_Url + product.product_lens_image1}`}
               alt={product.product_lens_title1}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
-            <h3 className="text-3xl font-semibold mb-4">{product.product_lens_title1}</h3>
+            <h3 className="text-3xl font-semibold mb-4">
+              {product.product_lens_title1}
+            </h3>
             <p>{product.product_lens_description1}</p>
           </div>
 
           <div className="text-center">
             <img
-              src={`https://atal-dashboard-backend.onrender.com/uploads/${product.product_lens_image2}`}
+              src={`${Image_Url + product.product_lens_image2}`}
               alt={product.product_lens_title2}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
-            <h3 className="text-3xl font-semibold mb-4">{product.product_lens_title2}</h3>
+            <h3 className="text-3xl font-semibold mb-4">
+              {product.product_lens_title2}
+            </h3>
             <p>{product.product_lens_description1}</p>
           </div>
         </div>
