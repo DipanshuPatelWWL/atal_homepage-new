@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import CountUp from "react-countup";
 import { useState } from "react";
 import API from "../../API/Api";
-const Review = () => {
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/"
+// const Image_Url = "http://localhost:4000/uploads/";
 
+const Review = () => {
   const [reviews, setReviews] = useState([{}]);
   // Fetch Reviews
   const fetchReviews = async () => {
@@ -56,7 +58,7 @@ const Review = () => {
           <div className="mr-16 ml-20 pb-20 w-800 md:block hidden">
             <div className="bg-red-600 rounded-xl ">
               <img
-                src={`https://atal-dashboard-backend.onrender.com/uploads/${data.image}`}
+                src={`${Image_Url + data.image}`}
                 alt="woman"
                 loading="lazy"
                 decoding="async"

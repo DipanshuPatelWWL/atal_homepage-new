@@ -11,7 +11,9 @@ import { useEffect } from "react";
 import API from "../../API/Api";
 // import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
-const Image_Url = "http://localhost:4000/uploads/";
+
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
+// const Image_Url = "http://localhost:4000/uploads/";
 
 const Cartpage = () => {
   const location = useLocation();
@@ -61,38 +63,14 @@ const Cartpage = () => {
                 <img
                   src={img}
                   alt={`frame-${index}`}
-                  className={`w-[100px] hover:cursor-pointer rounded ${
-                    mainImage === img ? "ring-2 ring-green-700" : ""
-                  }`}
+                  className={`w-[100px] hover:cursor-pointer rounded ${mainImage === img ? "ring-2 ring-green-700" : ""
+                    }`}
                 />
               </button>
             ))}
           </div>
 
           {mainImage && (
-            // <div className="w-[500px] mx-auto mt-10">
-            //   <img
-            //     {...{
-            //       smallImage: {
-            //         alt: product.product_name,
-            //         isFluidWidth: true,
-            //         src: mainImage,
-            //       },
-            //       largeImage: {
-            //         src: mainImage,
-            //         width: 1000,
-            //         height: 500,
-            //       },
-            //       enlargedImageContainerDimensions: {
-            //         width: "125%",
-            //         height: "160%",
-            //       },
-            //       isHintEnabled: true,
-            //       shouldUsePositiveSpaceLens: true,
-            //     }}
-            //   />
-            // </div>
-
             <div className="flex-1 border-r-1 border-black">
               <img
                 src={mainImage}
