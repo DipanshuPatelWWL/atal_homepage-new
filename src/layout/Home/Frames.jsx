@@ -2,7 +2,8 @@ import "./FlipCard.css";
 import { useEffect, useState } from "react";
 import API from "../../API/Api";
 import { Link } from "react-router-dom";
-const Image_Url = "http://localhost:4000/uploads/";
+// const Image_Url = "http://localhost:4000/uploads/";
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 const Frames = () => {
   const [frameData, setFrameData] = useState([]);
@@ -10,7 +11,7 @@ const Frames = () => {
   const getAllFrames = async () => {
     try {
       const res = await API.get(
-        "http://localhost:4000/api/getBySubCategory/Shop By Category"
+        "/getBySubCategory/Shop By Category"
       );
       setFrameData(res.data.subcategories);
     } catch (err) {

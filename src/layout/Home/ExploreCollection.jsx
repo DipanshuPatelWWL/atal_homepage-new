@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import img1 from "../../assets/newcollection/eyeglasses.jpg";
-// import img2 from "../../assets/newcollection/power.jpg";
-// import img3 from "../../assets/newcollection/sports.jpg";
-// import img4 from "../../assets/newcollection/sunglass.jpg";
-// import img5 from "../../assets/newcollection/blueglasses.jpg";
-// import img6 from "../../assets/newcollection/kids.png";
+
 import { Link } from "react-router-dom";
 import API from "../../API/Api";
-const Image_Url = "http://localhost:4000/uploads/";
+// const Image_Url = "http://localhost:4000/uploads/";
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 const ExploreCollection = () => {
   const [ourCollection, setOurCollection] = useState([]);
@@ -16,7 +12,7 @@ const ExploreCollection = () => {
   const getOurCollection = async () => {
     try {
       const res = await API.get(
-        "http://localhost:4000/api/getBySubCategory/Our Collections"
+        "/getBySubCategory/Our Collections"
       );
       setOurCollection(res.data.subcategories);
       setHeading(res.data.subcategories[0].cat_sec);

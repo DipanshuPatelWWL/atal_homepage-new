@@ -5,14 +5,15 @@ import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 function Product() {
   const location = useLocation();
-  const { category, subcategory } = location.state; 
- 
+  const { category, subcategory } = location.state;
+
   // const [product, setproduct] = useState([{}]);
-   const [product, setproduct] = useState([]);
-  
+  const [product, setproduct] = useState([]);
+
   const fetchproduct = async () => {
     try {
       const res = await API.get(`/getProducts/${category}/${subcategory}`);
@@ -42,13 +43,13 @@ function Product() {
           >
             {/* Image */}
             {data.product_image_collection &&
-            data.product_image_collection.length > 0 ? (
+              data.product_image_collection.length > 0 ? (
               <Link to="/cart" state={{ ID: data._id }}>
                 <img
                   src={
                     data.product_image_collection[0].startsWith("http")
                       ? data.product_image_collection[0]
-                      : `http://localhost:4000/uploads/${data.product_image_collection[0]}`
+                      : `${Image_Url + data.product_image_collection[0]}`
                   }
                   alt={data.product_name}
                   className="w-full h-36 object-contain mb-4 hover:scale-105 hover:cursor-pointer"
@@ -84,7 +85,7 @@ function Product() {
                       id: data._id,
                       name: data.product_name,
                       price: data.product_sale_price,
-                      image: `http://localhost:4000/uploads/${data.product_image_collection[0]}`,
+                      image: `${Image_Url + data.product_image_collection[0]}`,
                     })
                   );
                   Swal.fire({
