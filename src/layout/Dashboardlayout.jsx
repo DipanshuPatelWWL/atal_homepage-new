@@ -35,9 +35,9 @@ export default function Dashboardlayout() {
             <div className="flex-1 flex flex-col">
                 {/* Header (Always Visible) */}
                 <header className="bg-white shadow-md px-6 py-5 flex justify-between items-center">
-                    <h1 className="text-xl font-semibold">Admin Dashboard</h1>
+                    <h1 className="text-xl font-semibold">User Dashboard</h1>
                     <div className="flex items-center space-x-4">
-                        <span className="text-gray-600 text-xl">Hello, Admin</span>
+                        <span className="text-gray-600 text-xl">Hello, User</span>
                         <button className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-xl">
                             Logout
                         </button>

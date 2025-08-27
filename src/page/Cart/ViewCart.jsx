@@ -5,16 +5,21 @@ import {
   decrementQuantity,
   removeFromCart,
 } from '../../redux/cartSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ViewCart = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    navigate("/checkout")
+  }
 
   return (
     <div className="container mx-auto px-4 py-10">
@@ -90,7 +95,7 @@ const ViewCart = () => {
               <span>Total:</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
-            <button className="mt-6 w-full bg-black text-white py-3 rounded hover:bg-gray-900 transition">
+            <button onClick={handleCheckout} className="mt-6 w-full bg-black text-white py-3 rounded hover:bg-gray-900 transition">
               Proceed to Checkout
             </button>
           </div>
