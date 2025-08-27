@@ -3,12 +3,8 @@ import Slider from "react-slick";
 import { FiArrowRight } from "react-icons/fi";
 import { useState } from "react";
 import { useEffect } from "react";
-import API from "../../API/Api";
+import API, { IMAGE_URL } from "../../API/Api";
 import { Link } from "react-router-dom";
-
-
-// const Image_Url = "http://localhost:4000/uploads/"
-const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/"
 
 const Trending = () => {
   const [reviews, setReviews] = useState([{}]);
@@ -89,7 +85,7 @@ const Trending = () => {
                     src={
                       item.product_image_collection[0].startsWith("http")
                         ? item.product_image_collection[0]
-                        : `${Image_Url + item.product_image_collection[0]}`
+                        : `${IMAGE_URL + item.product_image_collection[0]}`
                     }
                     alt={item.product_name}
                     className="w-full h-36 object-contain mb-4 hover:scale-105"

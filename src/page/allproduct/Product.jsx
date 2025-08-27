@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import API from "../../API/Api";
+import API, { IMAGE_URL } from "../../API/Api";
 import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
-const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 function Product() {
   const location = useLocation();
   const { category, subcategory } = location.state;
 
-  // const [product, setproduct] = useState([{}]);
   const [product, setproduct] = useState([]);
 
   const fetchproduct = async () => {
@@ -49,7 +47,7 @@ function Product() {
                   src={
                     data.product_image_collection[0].startsWith("http")
                       ? data.product_image_collection[0]
-                      : `${Image_Url + data.product_image_collection[0]}`
+                      : `${IMAGE_URL + data.product_image_collection[0]}`
                   }
                   alt={data.product_name}
                   className="w-full h-36 object-contain mb-4 hover:scale-105 hover:cursor-pointer"
@@ -85,7 +83,7 @@ function Product() {
                       id: data._id,
                       name: data.product_name,
                       price: data.product_sale_price,
-                      image: `${Image_Url + data.product_image_collection[0]}`,
+                      image: `${IMAGE_URL + data.product_image_collection[0]}`,
                     })
                   );
                   Swal.fire({

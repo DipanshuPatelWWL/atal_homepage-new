@@ -19,6 +19,9 @@ import About from "./components/About";
 import CustHome from "./components/CustHome";
 import ViewCart from "./page/Cart/ViewCart";
 import Product from "./page/allproduct/Product";
+import InsuranceClaimForm from "./page/form/InsuranceClaimForm";
+import DocumentUploadForm from "./page/form/DocumentUploadForm";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +78,14 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <Page />,
+      },
+      {
+        path: "/form",
+        element: <InsuranceClaimForm/>,
+      },
+      {
+        path: "/form-new",
+        element: <DocumentUploadForm/>,
       },
     ],
   },

@@ -8,12 +8,9 @@ import { addToCart } from "../../redux/cartSlice";
 import Insurance from "./Insurance";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import API from "../../API/Api";
+import API, { IMAGE_URL } from "../../API/Api";
 // import ReactImageMagnify from 'react-image-magnify';
 import Swal from "sweetalert2";
-
-const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
-// const Image_Url = "http://localhost:4000/uploads/";
 
 const Cartpage = () => {
   const location = useLocation();
@@ -37,12 +34,12 @@ const Cartpage = () => {
       setProduct(prod);
       if (prod.product_image_collection?.length > 0) {
         setMainImage(
-          `${Image_Url + prod.product_image_collection[0]}`
+          `${IMAGE_URL + prod.product_image_collection[0]}`
         );
         setGalleryImages(
           prod.product_image_collection.map(
             (img) =>
-              `${Image_Url + img}`
+              `${IMAGE_URL + img}`
           )
         );
       }
@@ -175,7 +172,7 @@ const Cartpage = () => {
         <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="text-center">
             <img
-              src={`${Image_Url + product.product_lens_image1}`}
+              src={`${IMAGE_URL + product.product_lens_image1}`}
               alt={product.product_lens_title1}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
@@ -187,7 +184,7 @@ const Cartpage = () => {
 
           <div className="text-center">
             <img
-              src={`${Image_Url + product.product_lens_image2}`}
+              src={`${IMAGE_URL + product.product_lens_image2}`}
               alt={product.product_lens_title2}
               className="mx-auto mb-6 object-cover hover:scale-105"
             />
