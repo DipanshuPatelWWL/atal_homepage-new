@@ -8,26 +8,36 @@ import {
 } from "react-icons/fa";
 import { FaSquareInstagram, FaBars } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/category/logo.png";
 import { IoIosCloseCircle } from "react-icons/io";
-import { useSelector } from "react-redux";
-import CartDrawer from './CartDrawer';
+import { useSelector, useDispatch } from "react-redux";
+import CartDrawer from "./CartDrawer";
+
 function Header() {
-  const [cartOpen, setCartOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // cart quantity from redux
   const totalQuantity = useSelector((state) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
+
+  // auth state from redux (example: state.auth.user)
+  const user = localStorage.getItem("user");
+
+  const [cartOpen, setCartOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // rotating placeholder logic
   const placeholders = [
     "Search for sunglasses...",
     "Search for eyeglasses...",
     "Search for contact lenses...",
     "Search for offers...",
   ];
-
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,6 +49,17 @@ function Header() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
     <>
@@ -55,7 +76,7 @@ function Header() {
       </div>
 
       {/* Desktop Header */}
-      <header className="hidden lg:block bg-white text-white shadow-xl">
+      <header className="hidden lg:block bg-white shadow-xl">
         <div className="flex items-center justify-between px-6 py-2">
           {/* Logo */}
           <Link to="/">
@@ -67,13 +88,12 @@ function Header() {
               decoding="async"
             />
           </Link>
+
           {/* Search Bar */}
           <div className="flex-grow max-w-2xl">
             <div className="relative">
               <input
                 type="text"
-                name="index"
-                id="index"
                 placeholder={placeholders[index]}
                 className="w-full rounded-full border border-gray-300 bg-gray-100 py-2 pl-6 pr-10 placeholder-gray-500 focus:outline-none ring-2 ring-red-600 text-black"
               />
@@ -83,21 +103,43 @@ function Header() {
 
           {/* Icons */}
           <div className="flex items-center gap-6 text-2xl">
-            <div className="flex items-center gap-1 text-red-600 cursor-pointer hover:text-black">
-              <FaUser />
-              <span className="hover:underline">Sign In</span>
-            </div>
             <FaHeart className="text-red-600 cursor-pointer hover:text-black" />
 
+            {/* Cart */}
             <div className="relative">
-              <FaCartShopping onClick={() => setCartOpen(true)} className="text-red-600 cursor-pointer hover:text-black text-2xl" />
-
+              <FaCartShopping
+                onClick={() => setCartOpen(true)}
+                className="text-red-600 cursor-pointer hover:text-black text-2xl"
+              />
               {totalQuantity > 0 && (
-                <span className="absolute -top-2 -right-2 bg-black text-white-500 text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                   {totalQuantity}
                 </span>
               )}
             </div>
+
+            {/* Auth Section */}
+            {!user ? (
+              <div
+                onClick={handleLogin}
+                className="flex items-center gap-1 text-red-600 cursor-pointer hover:text-black"
+              >
+                <FaUser />
+                <span className="hover:underline">Sign In</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                {/* user image */}
+                <FaUser className="text-red-600 hover:text-black" />
+                {/* logout button */}
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm hover:bg-black"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -180,7 +222,10 @@ function Header() {
           </li>
         </ul>
       </div>
+
+      {/* Cart Drawer */}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+
       {/* Overlay when sidebar is open */}
       {sidebarOpen && (
         <div
