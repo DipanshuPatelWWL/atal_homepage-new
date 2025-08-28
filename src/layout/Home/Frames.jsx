@@ -1,9 +1,7 @@
 import "./FlipCard.css";
 import { useEffect, useState } from "react";
-import API from "../../API/Api";
+import API, { IMAGE_URL } from "../../API/Api";
 import { Link } from "react-router-dom";
-// const Image_Url = "http://localhost:4000/uploads/";
-const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
 
 const Frames = () => {
   const [frameData, setFrameData] = useState([]);
@@ -44,7 +42,7 @@ const Frames = () => {
               <div className="flip-card-inner">
                 <div className="flip-card-front overflow-hidden">
                   <img
-                    src={Image_Url + frame.image}
+                    src={IMAGE_URL + frame.image}
                     loading="lazy"
                     decoding="async"
                     alt="front"

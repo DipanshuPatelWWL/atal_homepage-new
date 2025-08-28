@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import API from "../../API/Api";
-// const Image_Url = "http://localhost:4000/uploads/";
-const Image_Url = "https://atal-dashboard-backend.onrender.com/uploads/";
+import API, { IMAGE_URL } from "../../API/Api";
 
 const ExploreCollection = () => {
   const [ourCollection, setOurCollection] = useState([]);
@@ -54,7 +52,7 @@ const ExploreCollection = () => {
               className="group relative overflow-hidden rounded-xl shadow hover:shadow-lg transition-all"
             >
               <img
-                src={Image_Url + item.image}
+                src={IMAGE_URL + item.image}
                 alt={item.description}
                 loading="lazy"
                 decoding="async"

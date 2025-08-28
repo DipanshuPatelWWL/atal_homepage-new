@@ -18,13 +18,17 @@ import About from "./components/About";
 import CustHome from "./components/CustHome";
 import ViewCart from "./page/Cart/ViewCart";
 import Product from "./page/allproduct/Product";
+
+import InsuranceClaimForm from "./page/form/InsuranceClaimForm";
+import DocumentUploadForm from "./page/form/DocumentUploadForm";
 import Checkout from "./page/checkout/Checkout";
 import OrderPlaced from "./page/order/OrderPlaced";
 import Register from "./page/register/Register";
 
-// 🔐 ProtectedRoute
+//  ProtectedRoute
 import ProtectedRoute from "./page/protectedRoute/ProtectedRoute";
 import Login from "./page/login/Login";
+
 
 const router = createBrowserRouter([
   {
@@ -69,6 +73,16 @@ const router = createBrowserRouter([
           // </ProtectedRoute>
         ),
       },
+      {
+
+        path: "/form",
+        element: <InsuranceClaimForm />,
+      },
+      {
+        path: "/form-new",
+        element: <DocumentUploadForm />,
+      },
+
       {
         path: "/place-order",
         element: (
