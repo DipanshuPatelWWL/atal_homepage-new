@@ -5,7 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // ✅ Persist login using localStorage
+    // Persist login using localStorage
     useEffect(() => {
         const storedAuth = localStorage.getItem("isAuthenticated");
         if (storedAuth === "true") {

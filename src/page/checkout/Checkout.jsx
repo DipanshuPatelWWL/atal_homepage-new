@@ -160,20 +160,6 @@ export default function Checkout() {
                     </div>
                 )}
 
-                {/* Payment */}
-                {/* {currentStep === 3 && (
-                    <select
-                        value={formData.paymentMethod || ""}
-                        onChange={(e) => handleChange("paymentMethod", e.target.value)}
-                        className="w-full border p-3 rounded-lg"
-                    >
-                        <option>Select Payment Method</option>
-                        <option>Credit/Debit Card</option>
-                        <option>PayPal</option>
-                        <option>Financing</option>
-                    </select>
-                )} */}
-
                 {currentStep === 3 && (
                     <div className="space-y-4">
                         <select
