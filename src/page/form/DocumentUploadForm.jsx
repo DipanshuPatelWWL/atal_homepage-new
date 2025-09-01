@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const DocumentUploadForm = () => {
   const [documents, setDocuments] = useState({
@@ -18,8 +19,15 @@ const DocumentUploadForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Documents uploaded:", documents);
-    alert("Documents submitted successfully!");
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      icon: "success",
+      title: "Documents submitted successfully!",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    });
   };
 
   return (
@@ -32,99 +40,99 @@ const DocumentUploadForm = () => {
           Required Documents Upload
         </h2>
         <div className="grid grid-cols-2 gap-6">
-        {/* Eyeglass / Contact Lens Prescription */}
-        <div>
-          <label className="block font-medium mb-2">
-            Valid Eyeglass/Contact Lens Prescription *
-          </label>
-          <input
-            type="file"
-            name="eyeglassPrescription"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-            required
-          />
-        </div>
+          {/* Eyeglass / Contact Lens Prescription */}
+          <div>
+            <label className="block font-medium mb-2">
+              Valid Eyeglass/Contact Lens Prescription *
+            </label>
+            <input
+              type="file"
+              name="eyeglassPrescription"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+              required
+            />
+          </div>
 
-        {/* PD Measurement */}
-        <div>
-          <label className="block font-medium mb-2">
-            PD Measurement (or consent to remote measurement) *
-          </label>
-          <input
-            type="file"
-            name="pdMeasurement"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-            required
-          />
-        </div>
+          {/* PD Measurement */}
+          <div>
+            <label className="block font-medium mb-2">
+              PD Measurement (or consent to remote measurement) *
+            </label>
+            <input
+              type="file"
+              name="pdMeasurement"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+              required
+            />
+          </div>
 
-        {/* Insurance Card */}
-        <div>
-          <label className="block font-medium mb-2">
-            Insurance Card (Front & Back) *
-          </label>
-          <input
-            type="file"
-            name="insuranceCard"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-            required
-          />
-        </div>
+          {/* Insurance Card */}
+          <div>
+            <label className="block font-medium mb-2">
+              Insurance Card (Front & Back) *
+            </label>
+            <input
+              type="file"
+              name="insuranceCard"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+              required
+            />
+          </div>
 
-        {/* Government-issued ID (optional) */}
-        <div>
-          <label className="block font-medium mb-2">
-            Government-issued Photo ID (optional, for fraud prevention)
-          </label>
-          <input
-            type="file"
-            name="govID"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+          {/* Government-issued ID (optional) */}
+          <div>
+            <label className="block font-medium mb-2">
+              Government-issued Photo ID (optional, for fraud prevention)
+            </label>
+            <input
+              type="file"
+              name="govID"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+            />
+          </div>
 
-        {/* Contact Lens Prescription */}
-        <div>
-          <label className="block font-medium mb-2">
-            Contact Lens Prescription (if applicable)
-          </label>
-          <input
-            type="file"
-            name="contactLensPrescription"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+          {/* Contact Lens Prescription */}
+          <div>
+            <label className="block font-medium mb-2">
+              Contact Lens Prescription (if applicable)
+            </label>
+            <input
+              type="file"
+              name="contactLensPrescription"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+            />
+          </div>
 
-        {/* Third-Party Authorization */}
-        <div>
-          <label className="block font-medium mb-2">
-            Authorization Note + ID (for third-party pickup, if applicable)
-          </label>
-          <input
-            type="file"
-            name="thirdPartyAuth"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+          {/* Third-Party Authorization */}
+          <div>
+            <label className="block font-medium mb-2">
+              Authorization Note + ID (for third-party pickup, if applicable)
+            </label>
+            <input
+              type="file"
+              name="thirdPartyAuth"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+            />
+          </div>
 
-        {/* Warranty Claim Evidence */}
-        <div>
-          <label className="block font-medium mb-2">
-            Warranty Claim Evidence (e.g., product photos)
-          </label>
-          <input
-            type="file"
-            name="warrantyEvidence"
-            onChange={handleFileChange}
-            className="w-full border p-2 rounded-lg"
-          />
-        </div>
+          {/* Warranty Claim Evidence */}
+          <div>
+            <label className="block font-medium mb-2">
+              Warranty Claim Evidence (e.g., product photos)
+            </label>
+            <input
+              type="file"
+              name="warrantyEvidence"
+              onChange={handleFileChange}
+              className="w-full border p-2 rounded-lg"
+            />
+          </div>
         </div>
         {/* Submit */}
         <button

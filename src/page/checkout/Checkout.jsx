@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -146,8 +147,8 @@ const Checkout = () => {
                         className="border border-black p-2 rounded w-full col-span-2"
                     >
                         <option value="">Select Shipping Method</option>
-                        <option value="Standard">Standard (5–7 days)</option>
-                        <option value="Express">Express (2–3 days)</option>
+                        <option value="Standard">Standard (5-7 days)</option>
+                        <option value="Express">Express (2-3 days)</option>
                         <option value="Overnight">Overnight</option>
                     </select>
                 </div>
@@ -332,7 +333,15 @@ const Checkout = () => {
                             }}
                             onApprove={(data, actions) => {
                                 return actions.order.capture().then((details) => {
-                                    alert(`Transaction completed by ${details.payer.name.given_name}`);
+                                    Swal.fire({
+                                        toast: true,
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: `Transaction completed by ${details.payer.name.given_name}`,
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                        timerProgressBar: true
+                                    });
                                     // console.log("Full details:", details);
                                 });
                             }}
