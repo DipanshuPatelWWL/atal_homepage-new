@@ -100,7 +100,7 @@ function Register() {
             );
 
             alert("Registration successful!");
-            console.log(res.data);
+            // console.log(res.data);
 
             // reset
             setForm({

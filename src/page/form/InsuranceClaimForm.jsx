@@ -53,7 +53,7 @@ export default function InsuranceClaimForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting insurance claim:", formData);
+    // console.log("Submitting insurance claim:", formData);
     alert("Form ready to submit. Replace with API call.");
   };
 
@@ -191,7 +191,7 @@ export default function InsuranceClaimForm() {
             <input
               type="text"
               value={formData.provider.businessName}
-              
+
               className="border rounded p-2 w-full"
             />
             <input

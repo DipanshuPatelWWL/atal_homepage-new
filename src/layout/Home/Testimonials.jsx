@@ -32,8 +32,6 @@ const TestimonialsSlider = () => {
     const fetchTestimonial = async () => {
         try {
             const response = await API.get("/getTestimonial")
-            console.log(response);
-
             setTestimonials(response.data.testimonial)
         } catch (error) {
             console.log(error);
