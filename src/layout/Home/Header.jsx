@@ -58,8 +58,13 @@ function Header() {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("cartItems");
     navigate("/");
   };
+
+  const handleWishlist = () => {
+    navigate("/wishlist-page")
+  }
 
   return (
     <>
@@ -103,7 +108,7 @@ function Header() {
 
           {/* Icons */}
           <div className="flex items-center gap-6 text-2xl">
-            <FaHeart className="text-red-600 cursor-pointer hover:text-black" />
+            <FaHeart onClick={handleWishlist} className="text-red-600 cursor-pointer hover:text-black" />
 
             {/* Cart */}
             <div className="relative">

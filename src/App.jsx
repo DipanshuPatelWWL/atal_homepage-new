@@ -28,8 +28,10 @@ import Register from "./page/register/Register";
 //  ProtectedRoute
 import ProtectedRoute from "./page/protectedRoute/ProtectedRoute";
 import Login from "./page/login/Login";
+import WishlistPage from "./page/wishlist/WishlistPage";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-
+const userId = localStorage.getItem("user");
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,7 +42,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/faq", element: <FAQ /> },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
-      { path: "/allproduct", element: <Product /> },
+      { path: "/allproduct", element: <Product userId={userId} /> },
       { path: "/disclaimer", element: <DisclaimerPage /> },
       { path: "/termsandcondition", element: <TermsAndConditions /> },
       { path: "/liability", element: <LimitationOfLiability /> },
@@ -48,7 +50,7 @@ const router = createBrowserRouter([
       { path: "/eyeglasses-contact-policy", element: <EyeglassesContactPolicy /> },
       { path: "/rights-enforcement-policy", element: <RightsEnforcementPolicy /> },
 
-      // ✅ Protected Routes
+      //  Protected Routes
       {
         path: "/cart",
         element: (
@@ -69,7 +71,11 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: (
           // <ProtectedRoute>
-          <Checkout />
+          <PayPalScriptProvider
+            options={{ "client-id": "AXf1IDZMUR6E_q8lxGRiRvOAnLZ3E5DgnyYAV0eaIB3VdLn4KlZ9Msm8kZyvu_XLGcziwc31Lc7nrWPY", currency: "USD" }}
+          >
+            <Checkout />
+          </PayPalScriptProvider >
           // </ProtectedRoute>
         ),
       },
@@ -91,12 +97,20 @@ const router = createBrowserRouter([
           // </ProtectedRoute>
         ),
       },
+      {
+        path: "/wishlist-page",
+        element: (
+          // <ProtectedRoute>
+          <WishlistPage userId={userId} />
+          // </ProtectedRoute>
+        ),
+      },
 
       { path: "*", element: <Page /> },
     ],
   },
 
-  // ✅ Protected Dashboard
+  // Protected Dashboard
   {
     path: "/dash",
     element: (

@@ -1,58 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { FaStar } from 'react-icons/fa';
-import human1 from '../../assets/test/human1.jpg';
-import human2 from '../../assets/test/human2.jpg';
-import human3 from '../../assets/test/human3.jpg';
-import human4 from '../../assets/test/human4.jpg';
-import human5 from '../../assets/test/human5.jpg';
-import human6 from '../../assets/test/human6.jpg';
-const testimonials = [
-    {
-        name: 'Sneha Sharma',
-        title: 'Excellent Service!',
-        feedback: 'The sunglasses fit perfectly and the customer support was really helpful. Loved the packaging too!',
-        rating: 5,
-        image: human1,
-    },
-    {
-        name: 'Rekha Verma',
-        title: 'Stylish and Comfortable',
-        feedback: 'Loved the collection! My order arrived on time and the lenses are very comfortable.',
-        rating: 4,
-        image: human2,
-    },
-    {
-        name: 'Pallavi Mehta',
-        title: 'Value for Money',
-        feedback: 'Great quality for the price. Will definitely recommend to my friends!',
-        rating: 5,
-        image: human3,
-    },
-    {
-        name: 'Amit Sharma',
-        title: 'Excellent Service!',
-        feedback: 'The sunglasses fit perfectly and the customer support was really helpful. Loved the packaging too!',
-        rating: 5,
-        image: human4,
-    },
-    {
-        name: 'Nidhi Verma',
-        title: 'Stylish and Comfortable',
-        feedback: 'Loved the collection! My order arrived on time and the lenses are very comfortable.',
-        rating: 4,
-        image: human6,
-    },
-    {
-        name: 'Rohan Mehta',
-        title: 'Value for Money',
-        feedback: 'Great quality for the price. Will definitely recommend to my friends!',
-        rating: 5,
-        image: human5,
-    },
-];
+import API, { IMAGE_URL } from '../../API/Api';
 
 const TestimonialsSlider = () => {
+    const [testimonials, setTestimonials] = useState([]);
     const settings = {
         dots: true,
         infinite: true,
@@ -61,21 +13,36 @@ const TestimonialsSlider = () => {
         slidesToScroll: 1,
         autoplay: true,
         arrows: false,
-         responsive: [
-    {
-      breakpoint: 1024, // below 1024px (tablet)
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 640, // below 640px (mobile)
-      settings: {
-        slidesToShow: 1,
-      },
-    },
-  ],
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
+        ],
     };
+
+    const fetchTestimonial = async () => {
+        try {
+            const response = await API.get("/getTestimonial")
+            console.log(response);
+
+            setTestimonials(response.data.testimonial)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchTestimonial()
+    }, [])
 
     return (
         <section className="py-16 px-6 bg-gray-100 text-center">
@@ -87,17 +54,17 @@ const TestimonialsSlider = () => {
                         <div className="bg-white hover:bg-red-600 hover:text-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto border-1 border-red-600">
                             <div className="flex flex-col items-center">
                                 <img
-                                    src={item.image}
-                                    alt={item.name}
+                                    src={Image_Url + item.image}
+                                    alt={item.fullName}
                                     className="w-28 h-28 rounded-full object-cover mb-4 shadow"
                                     loading='lazy'
                                     decoding='async'
                                 />
                                 <div className="w-full flex justify-center text-left pl-4 mb-2">
-                                    <h4 className="text-lg font-semibold">{item.name}</h4>
+                                    <h4 className="text-lg font-semibold">{item.fullName}</h4>
                                 </div>
-                                <h5 className="text-xl font-semibold mb-2">{item.title}</h5>
-                                <p className="italic text-sm mb-4 max-w-xl">"{item.feedback}"</p>
+                                <h5 className="text-xl font-semibold mb-2">{item.heading}</h5>
+                                <p className="italic text-sm mb-4 max-w-xl">"{item.description}"</p>
                                 <div className="flex justify-center text-yellow-500 mb-2">
                                     {[...Array(item.rating)].map((_, i) => (
                                         <FaStar key={i} />

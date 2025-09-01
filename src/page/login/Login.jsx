@@ -25,7 +25,8 @@ function Login() {
                 headers: { "Content-Type": "application/json" },
             });
             // Save token + user info (localStorage or Redux)
-            localStorage.setItem("user", JSON.stringify(res.data.customer.id));
+            // localStorage.setItem("user", JSON.stringify(res.data.customer.id));
+            localStorage.setItem("user", res.data.customer.id);
             localStorage.setItem("token", res.data.token);
             isAuthenticated;
 
