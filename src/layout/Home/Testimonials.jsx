@@ -54,7 +54,7 @@ const TestimonialsSlider = () => {
                         <div className="bg-white hover:bg-red-600 hover:text-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto border-1 border-red-600">
                             <div className="flex flex-col items-center">
                                 <img
-                                    src={Image_Url + item.image}
+                                    src={IMAGE_URL + item.image}
                                     alt={item.fullName}
                                     className="w-28 h-28 rounded-full object-cover mb-4 shadow"
                                     loading='lazy'

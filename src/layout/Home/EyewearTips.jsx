@@ -42,7 +42,7 @@ export default function EyewearTips() {
           >
             <div className="flex justify-center mb-4">
               <img
-                src={Image_Url + tip.image}
+                src={IMAGE_URL + tip.image}
                 alt={tip.fullName}
                 className="w-12 h-12 rounded-full object-cover mb-4 shadow border border-red-600"
                 loading='lazy'
