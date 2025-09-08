@@ -26,7 +26,7 @@ const Footer = () => {
                         <div><MdEmail className="text-3xl" /></div>
                         <div className="text-2xl">Email</div>
                     </div>
-                    <div className="mt-1 text-lg">info@ataloptical.ca</div>
+                    <div className="mt-1 text-lg">info.ataloptical@gmail.com</div>
                 </div>
 
                 {/* Box 2 - Useful Links */}
@@ -34,12 +34,12 @@ const Footer = () => {
                     <h3 className="text-red-600 text-2xl font-semibold mb-2">Useful Links</h3>
                     <ul className="space-y-1">
                         {[
-                            "Home", 
-                            "About", 
-                            "Services", 
-                            "Privacy-Policy", 
-                            "Book Eye Exam", 
-                            "FAQ", 
+                            "Home",
+                            "About",
+                            "Services",
+                            "Privacy-Policy",
+                            "Book Eye Exam",
+                            "FAQ",
                             "Contact Us"
                         ].map(link => (
                             <li key={link}>
@@ -73,18 +73,18 @@ const Footer = () => {
                 <div>
                     <h3 className="text-red-600 text-2xl font-semibold mb-2">Contact Us</h3>
                     <div className="flex items-center gap-2 text-red-600">
-                        <div><FaMapMarkedAlt className="text-3xl"/></div>
+                        <div><FaMapMarkedAlt className="text-3xl" /></div>
                         <div className="text-xl">Brompton west</div>
                     </div>
                     <p className="max-w-[200px] mt-1 ">
                         10906 Hurontario St, Unit D7 Brampton, ON L7A 3R9 905-970-9444
                     </p>
                     <div className="flex items-center gap-2 text-red-600 mt-4">
-                        <div><FaMapMarkedAlt className="text-3xl"/></div>
+                        <div><FaMapMarkedAlt className="text-3xl" /></div>
                         <div className="text-xl">Airport Rd</div>
                     </div>
                     <p className="max-w-[200px] mt-1">
-                         34 Shining Willow Crescent, Brampton, Ontario, Canada
+                        34 Shining Willow Crescent, Brampton, Ontario, Canada
                     </p>
                 </div>
             </div>
