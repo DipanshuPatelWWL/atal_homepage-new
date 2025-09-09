@@ -1,378 +1,180 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { PayPalButtons } from "@paypal/react-paypal-js";
-import Swal from "sweetalert2";
+import React, { useState } from "react";
 
-const Checkout = () => {
-    const [currentStep, setCurrentStep] = useState(0);
-    const [formData, setFormData] = useState({});
-    const [billingDifferent, setBillingDifferent] = useState(false);
-    const navigate = useNavigate();
-
-    const steps = [
-        "Contact",
-        "Shipping",
-        "Billing",
-        "Prescription",
-        "Review & Pay",
-    ];
-
-    useEffect(() => {
-        const savedData = localStorage.getItem("checkoutDraft");
-        if (savedData) setFormData(JSON.parse(savedData));
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem(
-            "checkoutDraft",
-            JSON.stringify({ ...formData, currentStep })
-        );
-    }, [formData, currentStep]);
-
-    const handleChange = (field, value) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-    };
-
-    const nextStep = () =>
-        setCurrentStep((p) => Math.min(p + 1, steps.length - 1));
-    const prevStep = () => setCurrentStep((p) => Math.max(p - 1, 0));
-
-    const handleSubmit = () => {
-        localStorage.removeItem("checkoutDraft");
-        navigate("/place-order");
-    };
-
-    // Simple Mock Bill Data
-    const subtotal = 2000;
-    const tax = subtotal * 0.05;
-    const discount = 200;
-    const total = subtotal + tax - discount;
+export default function Checkout() {
+    const [useBillingSame, setUseBillingSame] = useState(true);
+    const [usePrescriptionOnFile, setUsePrescriptionOnFile] = useState(true);
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            {/* Progress Bar */}
-            <div className="mb-8">
-                <div className="flex items-center">
-                    {steps.map((step, idx) => (
-                        <React.Fragment key={idx}>
-                            <button
-                                type="button"
-                                onClick={() => setCurrentStep(idx)}
-                                className="flex flex-col items-center flex-shrink-0 text-center cursor-pointer group mt-5"
-                                aria-current={idx === currentStep ? "step" : undefined}
-                            >
-                                <div
-                                    className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all
-                    ${idx <= currentStep
-                                            ? "bg-red-600 text-white border-red-600"
-                                            : "border-black text-black group-hover:bg-black group-hover:text-white"
-                                        }`}
-                                >
-                                    {idx + 1}
-                                </div>
-                                <span
-                                    className={`mt-2 text-sm ${idx === currentStep
-                                        ? "text-red-600 font-bold"
-                                        : "text-gray-700"
-                                        }`}
-                                >
-                                    {step}
-                                </span>
-                            </button>
-                            {idx < steps.length - 1 && (
-                                <div
-                                    className={`flex-1 h-2 rounded-sm transition-colors
-                    ${idx < currentStep ? "bg-red-600" : "bg-gray-300"}`}
-                                />
-                            )}
-                        </React.Fragment>
-                    ))}
+        <div className="max-w-4xl mx-auto p-8 space-y-10 bg-gray-50 rounded-2xl shadow-lg">
+            <h1 className="text-3xl font-bold mb-6 text-center">Checkout</h1>
+
+            {/* Contact */}
+            <div>
+                <h2 className="text-xl font-semibold pb-2">Contact</h2>
+                <div className="space-y-4 flex gap-4">
+                    <input type="email" placeholder="Email" className="w-full border p-3 rounded-lg h-12" required />
+                    <input type="tel" placeholder="Mobile Phone" className="w-full border p-3 rounded-lg h-12" required />
                 </div>
             </div>
 
-            {/* Step 0: Contact */}
-            {currentStep === 0 && (
-                <div className="grid grid-cols-2 gap-4">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={formData.email || ""}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        className="border border-black p-2 rounded w-full col-span-2"
-                    />
-                    <input
-                        type="tel"
-                        placeholder="Mobile Phone"
-                        value={formData.phone || ""}
-                        onChange={(e) => handleChange("phone", e.target.value)}
-                        className="border border-black p-2 rounded w-full col-span-2"
-                    />
-                </div>
-            )}
-
-            {/* Step 1: Shipping */}
-            {currentStep === 1 && (
-                <div className="grid grid-cols-2 gap-4">
-                    <input
-                        type="text"
-                        placeholder="Full Name"
-                        value={formData.shippingName || ""}
-                        onChange={(e) => handleChange("shippingName", e.target.value)}
-                        className="border border-black p-2 rounded w-full col-span-2"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Street"
-                        value={formData.shippingStreet || ""}
-                        onChange={(e) => handleChange("shippingStreet", e.target.value)}
-                        className="border border-black p-2 rounded w-full col-span-2"
-                    />
-                    <input
-                        type="text"
-                        placeholder="City"
-                        value={formData.shippingCity || ""}
-                        onChange={(e) => handleChange("shippingCity", e.target.value)}
-                        className="border border-black p-2 rounded w-full"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Zip"
-                        value={formData.shippingZip || ""}
-                        onChange={(e) => handleChange("shippingZip", e.target.value)}
-                        className="border border-black p-2 rounded w-full"
-                    />
-                    <select
-                        value={formData.shippingMethod || ""}
-                        onChange={(e) => handleChange("shippingMethod", e.target.value)}
-                        className="border border-black p-2 rounded w-full col-span-2"
-                    >
-                        <option value="">Select Shipping Method</option>
-                        <option value="Standard">Standard (5-7 days)</option>
-                        <option value="Express">Express (2-3 days)</option>
-                        <option value="Overnight">Overnight</option>
+            {/* Shipping */}
+            <div>
+                <h2 className="text-xl font-semibold pb-2">Shipping</h2>
+                <div className="space-y-4 flex gap-4">
+                    <input type="text" placeholder="Full Name" className="w-full border p-3 rounded-lg h-12" required />
+                    <input type="text" placeholder="Address" className="w-full border p-3 rounded-lg h-12" required />
+                    <select className="w-full border p-3 rounded-lg h-12">
+                        <option>Select Shipping Method</option>
+                        <option>Standard (5–7 days)</option>
+                        <option>Express (2–3 days)</option>
                     </select>
-                </div>
-            )}
+                </div></div>
 
-            {/* Step 2: Billing */}
-            {currentStep === 2 && (
-                <div>
-                    <label className="flex items-center mb-2">
-                        <input
-                            type="checkbox"
-                            checked={billingDifferent}
-                            onChange={(e) => setBillingDifferent(e.target.checked)}
-                            className="mr-2"
-                        />
-                        Billing address is different from shipping
-                    </label>
-                    {billingDifferent && (
-                        <div className="grid grid-cols-2 gap-4 mt-4">
-                            <input
-                                type="text"
-                                placeholder="Street"
-                                value={formData.billingStreet || ""}
-                                onChange={(e) => handleChange("billingStreet", e.target.value)}
-                                className="border border-black p-2 rounded w-full col-span-2"
-                            />
-                            <input
-                                type="text"
-                                placeholder="City"
-                                value={formData.billingCity || ""}
-                                onChange={(e) => handleChange("billingCity", e.target.value)}
-                                className="border border-black p-2 rounded w-full"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Zip"
-                                value={formData.billingZip || ""}
-                                onChange={(e) => handleChange("billingZip", e.target.value)}
-                                className="border border-black p-2 rounded w-full"
-                            />
-                        </div>
-                    )}
-                </div>
-            )}
+            {/* Billing */}
+            <section className="space-y-4">
+                <h2 className="text-xl font-semibold">Billing</h2>
+                <label className="flex items-center gap-2">
+                    <input
+                        type="checkbox"
+                        checked={useBillingSame}
+                        onChange={() => setUseBillingSame(!useBillingSame)}
+                    />
+                    Same as shipping address
+                </label>
+                {!useBillingSame && (
+                    <input type="text" placeholder="Billing Address" className="w-full border p-3 rounded-lg" />
+                )}
+            </section>
 
-            {/* Step 3: Prescription */}
-            {currentStep === 3 && (
-                <div>
-                    <label className="block mb-2 font-medium">Prescription</label>
-                    <div className="space-y-2">
-                        <label className="flex items-center">
+            {/* Payment */}
+            <section className="space-y-4">
+                <h2 className="text-xl font-semibold">Payment</h2>
+                <select className="w-full border p-3 rounded-lg">
+                    <option>Select Payment Method</option>
+                    <option>Credit/Debit Card</option>
+                    <option>PayPal</option>
+                    <option>Financing</option>
+                </select>
+            </section>
+
+            {/* Prescription */}
+            <div>
+                <h2 className="text-xl font-semibold pb-2">Prescription</h2>
+                <div className="space-y-4">
+                    <div className="flex gap-10">
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="prescription"
+                                checked={usePrescriptionOnFile}
+                                onChange={() => setUsePrescriptionOnFile(true)}
+                            />
+                            Use prescription on file
+                        </label>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="prescription"
+                                checked={!usePrescriptionOnFile}
+                                onChange={() => setUsePrescriptionOnFile(false)}
+                            />
                             Upload prescription
                         </label>
-                    </div>
-                    <input
-                        type="file"
-                        onChange={(e) =>
-                            handleChange("prescription", e.target.files[0]?.name)
-                        }
-                        className="border border-black p-2 rounded w-full mt-3"
-                    />
-                </div>
-            )}
-
-            {/* Step 4: Review & Pay */}
-            {currentStep === 4 && (
-                <div className="border-2 border-black rounded-xl shadow-lg bg-white p-6 space-y-6">
-                    {/* Review */}
-                    <div>
-                        <h2 className="font-bold text-xl mb-4 text-red-600 border-b border-black pb-2">
-                            Review Details
-                        </h2>
-                        <p>
-                            <strong>Email:</strong> {formData.email}
-                        </p>
-                        <p>
-                            <strong>Phone:</strong> {formData.phone}
-                        </p>
-                        <p>
-                            <strong>Shipping:</strong> {formData.shippingStreet},{" "}
-                            {formData.shippingCity} {formData.shippingZip} (
-                            {formData.shippingMethod})
-                        </p>
-                        {billingDifferent && (
-                            <p>
-                                <strong>Billing:</strong> {formData.billingStreet},{" "}
-                                {formData.billingCity} {formData.billingZip}
-                            </p>
-                        )}
-                        {formData.prescription && (
-                            <p>
-                                <strong>Prescription:</strong> {formData.prescription}
-                            </p>
+                        {!usePrescriptionOnFile && (
+                            <input type="file" accept="image/*,.pdf" className="w-100 border p-3 rounded-lg h-12" />
                         )}
                     </div>
-
-                    <div className="p-6">
-                        <h2 className="text-xl font-bold mb-4">Pay with PayPal</h2>
-
-                        <PayPalButtons
-                            style={{ layout: "vertical" }}
-                            createOrder={(data, actions) => {
-                                return actions.order.create({
-                                    purchase_units: [
-                                        {
-                                            amount: {
-                                                value: "20.00",
-                                            },
-                                        },
-                                    ],
-                                });
-                            }}
-                            onApprove={(data, actions) => {
-                                return actions.order.capture().then((details) => {
-                                    Swal.fire({
-                                        toast: true,
-                                        position: "top-end",
-                                        icon: "success",
-                                        title: `Transaction completed by ${details.payer.name.given_name}`,
-                                        showConfirmButton: false,
-                                        timer: 1500,
-                                        timerProgressBar: true
-                                    });
-                                    // console.log("Full details:", details);
-                                });
-                            }}
-                            onError={(err) => {
-                                console.error("PayPal Checkout Error:", err);
-                            }}
-                        />
-                    </div>
-
-                    {/* Consents */}
-                    <div>
-                        <h2 className="font-bold text-xl mb-4 text-red-600 border-b border-black pb-2">
-                            Consents
-                        </h2>
-                        <label className="flex items-center mb-2">
-                            <input
-                                type="checkbox"
-                                checked={formData.terms || false}
-                                onChange={(e) => handleChange("terms", e.target.checked)}
-                                className="mr-2"
-                            />
-                            I agree to Terms & Conditions
-                        </label>
-                        <label className="flex items-center mb-2">
-                            <input
-                                type="checkbox"
-                                checked={formData.warranty || false}
-                                onChange={(e) => handleChange("warranty", e.target.checked)}
-                                className="mr-2"
-                            />
-                            I agree to Warranty/Return Policy
-                        </label>
-                        <label className="flex items-center mb-2">
-                            <input
-                                type="checkbox"
-                                checked={formData.privacy || false}
-                                onChange={(e) => handleChange("privacy", e.target.checked)}
-                                className="mr-2"
-                            />
-                            I agree to Privacy Policy
-                        </label>
-                    </div>
-
-                    {/* Mock Bill */}
-                    <div>
-                        <h2 className="font-bold text-xl mb-4 text-red-600 border-b border-black pb-2">
-                            Mock Bill
-                        </h2>
-                        <div className="space-y-2 text-gray-800">
-                            <div className="flex justify-between">
-                                <span>Subtotal</span> <span>₹{subtotal.toFixed(2)}</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Tax (5%)</span> <span>₹{tax.toFixed(2)}</span>
-                            </div>
-                            <div className="flex justify-between text-green-600">
-                                <span>Discount</span> <span>-₹{discount.toFixed(2)}</span>
-                            </div>
-                            <div className="border-t mt-2 pt-2 flex justify-between font-bold text-red-600">
-                                <span>Total</span> <span>₹{total.toFixed(2)}</span>
-                            </div>
-                        </div>
+                    <div className="flex gap-4">
+                        <input type="text" placeholder="PD (single/dual)" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Segment height (if progressive)" className="w-full border p-3 rounded-lg" />
                     </div>
                 </div>
-            )}
+            </div>
 
-            {/* Navigation */}
-            <div className="flex justify-between mt-6">
-                {currentStep > 0 && (
-                    <button
-                        onClick={prevStep}
-                        className="px-4 py-2 rounded bg-black text-white hover:bg-gray-800"
-                    >
-                        Previous
-                    </button>
-                )}
-                {currentStep < steps.length - 1 && (
-                    <button
-                        onClick={nextStep}
-                        className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
-                    >
-                        Next
-                    </button>
-                )}
-                {currentStep === steps.length - 1 && (
-                    <button
-                        onClick={handleSubmit}
-                        disabled={
-                            !formData.paymentMethod ||
-                            !formData.terms ||
-                            !formData.warranty ||
-                            !formData.privacy
-                        }
-                        className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
-                    >
-                        Submit
-                    </button>
-                )}
+            {/* Product/Lens selections */}
+            <div>
+                <h2 className="text-xl font-semibold pb-2">Lens Selections</h2>
+                <div className="space-y-4 grid grid-cols-2 gap-4 ">
+
+                    <select className="w-full border p-3 rounded-lg h-12">
+                        <option>Lens Type</option>
+                        <option>Single Vision</option>
+                        <option>Progressive</option>
+                    </select>
+                    <select className="w-full border p-3 rounded-lg h-12">
+                        <option>Material</option>
+                        <option>Polycarbonate</option>
+                        <option>Trivex</option>
+                    </select>
+                    <select className="w-full border p-3 rounded-lg h-12">
+                        <option>Coatings</option>
+                        <option>Anti-reflective</option>
+                        <option>Blue light filter</option>
+                    </select>
+                    <select className="w-full border p-3 rounded-lg h-12">
+                        <option>Tints / Add-ons</option>
+                        <option>Photochromic</option>
+                        <option>Polarized</option>
+                    </select>
+                </div>
+            </div>
+
+            {/* Insurance */}
+            <div>
+                <h2 className="text-xl font-semibold pb-2">Insurance</h2>
+                <div className="space-y-4">
+                    <label className="flex items-center gap-2">
+                        <input type="checkbox" /> Apply insurance benefits
+                    </label>
+                    <div className="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="Insurer Name" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Policy/Plan Number" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Member ID" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Group Number" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Primary Insured’s Name" className="w-full border p-3 rounded-lg" />
+                        <input type="date" placeholder="DOB" className="w-full border p-3 rounded-lg" />
+                        <input type="text" placeholder="Relationship to Patient" className="w-full border p-3 rounded-lg" />
+                    </div>
+                    <label className="block">Upload Insurance Card (front/back)</label>
+                    <input type="file" multiple className="w-full border p-3 rounded-lg" />
+
+                    <label className="flex items-center gap-2">
+                        <input type="checkbox" /> Assignment of benefits consent
+                    </label>
+                </div>
+            </div>
+
+            {/* Discounts */}
+            <section className="space-y-4">
+                <h2 className="text-xl font-semibold">Discounts</h2>
+                <input type="text" placeholder="Gift card or discount code" className="w-full border p-3 rounded-lg" />
+            </section>
+
+            {/* Notes */}
+            <section className="space-y-4">
+                <h2 className="text-xl font-semibold">Order Notes</h2>
+                <textarea placeholder="Optional notes" className="w-full border p-3 rounded-lg" />
+            </section>
+
+            {/* Consents */}
+            <section className="space-y-2">
+                <label className="flex items-center gap-2">
+                    <input type="checkbox" /> I agree to Terms & Conditions
+                </label>
+                <label className="flex items-center gap-2">
+                    <input type="checkbox" /> I agree to Warranty/Return Policy
+                </label>
+                <label className="flex items-center gap-2">
+                    <input type="checkbox" /> I agree to Privacy Policy
+                </label>
+            </section>
+
+            {/* Submit */}
+            <div className="pt-6">
+                <button className="w-40 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700">
+                    Place Order
+                </button>
             </div>
         </div>
     );
-};
-
-export default Checkout;
+}

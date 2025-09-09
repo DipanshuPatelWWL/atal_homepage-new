@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./page/Home/Home";
+import Dashboard from "./page/dashboard/Dashboard";
 import Page from "./page/Page";
 import Layout from "./layout/Layout";
 import Cartpage from "./page/Cart/Cartpage";
@@ -8,30 +9,22 @@ import FAQ from "./page/FAQ/FAQ";
 import PrivacyPolicy from "./page/Privacy-Policy/PrivacyPolicy";
 import DisclaimerPage from './page/DisclaimerPage/DisclaimerPage';
 import TermsAndConditions from "./page/terms&condition/TermsAndConditions";
+import RightsEnforcementPolicy from "./page/right&enforcement/RightsEnforcementPolicy";
 import LimitationOfLiability from "./page/limitationOfLiability/Liability";
 import GeneralInformation from "./page/generalInformation/generalInfo";
 import EyeglassesContactPolicy from "./page/eyeglasses-contact-policy/EyeglassesContactPolicy";
-import RightsEnforcementPolicy from "./page/rights-enforcement-policy/RightsEnforcementPolicy";
-import Dashboardlayout from "./layout/Dashboardlayout";
-import Faq from "./components/Faq";
-import About from "./components/About";
-import CustHome from "./components/CustHome";
-import ViewCart from "./page/Cart/ViewCart";
-import Product from "./page/allproduct/Product";
-
+// import RightsEnforcementPolicy from "./page/rights-enforcement-policy/RightsEnforcementPolicy";
+// import Unauthorization from "./page/Unauthorised/Unauthorization";
+// import Registrationform from "./page/CustomerRegistration/Registrationform";
+import Checkout from "./page/Checkout/Checkout";
+// import EyeConsultation from "./page/EyeConsultation/EyeConsultation";
+// import InquiryForm from "./page/InquiryForm/InquiryForm";
 import InsuranceClaimForm from "./page/form/InsuranceClaimForm";
 import DocumentUploadForm from "./page/form/DocumentUploadForm";
-import Checkout from "./page/checkout/Checkout";
 import OrderPlaced from "./page/order/OrderPlaced";
 import Register from "./page/register/Register";
+import Services from "./components/Services";
 
-//  ProtectedRoute
-import ProtectedRoute from "./page/protectedRoute/ProtectedRoute";
-import Login from "./page/login/Login";
-import WishlistPage from "./page/wishlist/WishlistPage";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import ContactPage from "./page/contactUs/ContactPage";
-import EyeExam from "./page/bookEyeExam/EyeExam";
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(localStorage.getItem("user"));
@@ -110,6 +103,14 @@ function App() {
           element: <DocumentUploadForm />,
         },
         {
+          path: "/about",
+          element: <About />
+        },
+        {
+          path: "/services",
+          element: <Services />
+        },
+        {
           path: "/place-order",
           element: (
             // <ProtectedRoute>
@@ -146,7 +147,6 @@ function App() {
       ],
     },
   ]);
-
   return <RouterProvider router={router} />;
 }
 

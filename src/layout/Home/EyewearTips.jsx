@@ -1,5 +1,9 @@
-import API, { IMAGE_URL } from "../../API/Api";
+import { FaGlasses, FaFilePrescription, FaClipboardList } from "react-icons/fa";
+import { GiMicroscopeLens } from "react-icons/gi";
+import API from "../../API/Api";
 import { useEffect, useState } from "react";
+
+const Image_Url = "http://localhost:4000/uploads/";
 
 
 export default function EyewearTips() {
@@ -11,8 +15,6 @@ export default function EyewearTips() {
   const fetchEyewearTips = async () => {
     try {
       const response = await API.get("/getEyewearTips")
-      // console.log(response.data.EyewearTips);
-
       setEyewearTips(response.data.EyewearTips)
     } catch (error) {
       console.error(error)
@@ -42,9 +44,9 @@ export default function EyewearTips() {
           >
             <div className="flex justify-center mb-4">
               <img
-                src={IMAGE_URL + tip.image}
+                src={Image_Url + tip.image}
                 alt={tip.fullName}
-                className="w-12 h-12 rounded-full object-cover mb-4 shadow border border-red-600"
+                className="w-18 h-18 rounded-full object-cover mb-4 shadow border border-red-600"
                 loading='lazy'
                 decoding='async'
               /></div>
