@@ -31,9 +31,10 @@ import ProtectedRoute from "./page/protectedRoute/ProtectedRoute";
 import Login from "./page/login/Login";
 import WishlistPage from "./page/wishlist/WishlistPage";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ContactPage from "./page/contactUs/ContactPage";
+import EyeExam from "./page/bookEyeExam/EyeExam";
 
 function App() {
-  // new state to track userId dynamically
   const [currentUserId, setCurrentUserId] = useState(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -92,6 +93,14 @@ function App() {
             </PayPalScriptProvider>
             // </ProtectedRoute>
           ),
+        },
+        {
+          path: "contact-us",
+          element: <ContactPage />
+        },
+        {
+          path: "book-eye-exam",
+          element: <EyeExam />
         },
         {
           path: "/form",

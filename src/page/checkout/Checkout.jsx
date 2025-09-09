@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -146,8 +147,8 @@ const Checkout = () => {
                         className="border border-black p-2 rounded w-full col-span-2"
                     >
                         <option value="">Select Shipping Method</option>
-                        <option value="Standard">Standard (5–7 days)</option>
-                        <option value="Express">Express (2–3 days)</option>
+                        <option value="Standard">Standard (5-7 days)</option>
+                        <option value="Express">Express (2-3 days)</option>
                         <option value="Overnight">Overnight</option>
                     </select>
                 </div>
@@ -198,19 +199,6 @@ const Checkout = () => {
                 <div>
                     <label className="block mb-2 font-medium">Prescription</label>
                     <div className="space-y-2">
-                        {/* <label className="flex items-center">
-                            <input
-                                type="radio"
-                                name="prescriptionOption"
-                                value="onFile"
-                                checked={formData.prescriptionOption === "onFile"}
-                                onChange={(e) =>
-                                    handleChange("prescriptionOption", e.target.value)
-                                }
-                                className="mr-2"
-                            />
-                            Use prescription on file
-                        </label> */}
                         <label className="flex items-center">
                             Upload prescription
                         </label>
@@ -257,63 +245,6 @@ const Checkout = () => {
                         )}
                     </div>
 
-                    {/* Payment */}
-                    {/* <div>
-                        <h2 className="font-bold text-xl mb-4 text-red-600 border-b border-black pb-2">
-                            Payment Method
-                        </h2>
-                        <select
-                            value={formData.paymentMethod || ""}
-                            onChange={(e) => handleChange("paymentMethod", e.target.value)}
-                            className="border border-black p-2 rounded w-full focus:ring-2 focus:ring-red-600"
-                        >
-                            <option value="">Select Payment Method</option>
-                            <option value="Card">Card</option>
-                            <option value="PayPal">PayPal</option>
-                            <option value="Financing">Financing</option>
-                        </select>
-                        <div className="mt-4">
-                            {formData.paymentMethod === "Card" && (
-                                <div className="border border-black p-4 rounded-lg bg-gray-50">
-                                    <input
-                                        type="text"
-                                        placeholder="Card Number"
-                                        className="border border-black p-2 rounded w-full mb-3"
-                                    />
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <input
-                                            type="text"
-                                            placeholder="Expiry MM/YY"
-                                            className="border border-black p-2 rounded w-full"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="CVV"
-                                            className="border border-black p-2 rounded w-full"
-                                        />
-                                    </div>
-                                </div>
-                            )}
-                            {formData.paymentMethod === "PayPal" && (
-                                <div className="border border-black p-4 rounded-lg bg-gray-50">
-                                    <input
-                                        type="email"
-                                        placeholder="PayPal Email"
-                                        className="border border-black p-2 rounded w-full"
-                                    />
-                                </div>
-                            )}
-                            {formData.paymentMethod === "Financing" && (
-                                <div className="border border-black p-4 rounded-lg bg-gray-50">
-                                    <p className="text-sm text-gray-700">
-                                        You’ll be redirected to our financing partner for secure
-                                        processing.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    </div> */}
-
                     <div className="p-6">
                         <h2 className="text-xl font-bold mb-4">Pay with PayPal</h2>
 
@@ -332,7 +263,15 @@ const Checkout = () => {
                             }}
                             onApprove={(data, actions) => {
                                 return actions.order.capture().then((details) => {
-                                    alert(`Transaction completed by ${details.payer.name.given_name}`);
+                                    Swal.fire({
+                                        toast: true,
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: `Transaction completed by ${details.payer.name.given_name}`,
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                        timerProgressBar: true
+                                    });
                                     // console.log("Full details:", details);
                                 });
                             }}

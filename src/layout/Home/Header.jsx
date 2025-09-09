@@ -71,7 +71,7 @@ function Header() {
       {/* Top Bar */}
       <div className="bg-red-600 py-1 text-white flex justify-between items-center px-4 lg:px-6">
         <p className="text-sm lg:text-base">
-          Call Us Today! 1-866-242-3545 | atalopticalstore@gmail.com
+          Call Us Today! 1-866-242-3545 | info.ataloptical@gmail.com
         </p>
         <div className="flex gap-4 text-lg lg:text-xl">
           <FaFacebookF className="hover:cursor-pointer hover:text-black" />
@@ -165,14 +165,18 @@ function Header() {
             </Link>
             <li className="cursor-pointer hover:text-red-600">PROMOTION</li>
             <li className="cursor-pointer hover:text-red-600">CATEGORY</li>
-            <li className="cursor-pointer hover:text-red-600">CONTACT US</li>
+            <Link to="/contact-us">
+              <li className="cursor-pointer hover:text-red-600">CONTACT US</li>
+            </Link>
             <Link to="/faq">
               <li className="cursor-pointer hover:text-red-600">FAQ</li>
             </Link>
             <li className="cursor-pointer hover:text-red-600">COLLECTIONS</li>
-            <li className="cursor-pointer hover:text-black hover:bg-white bg-red-600 py-1 px-4 rounded-xl">
-              BOOK EYE EXAM
-            </li>
+            <Link to="/book-eye-exam">
+              <li className="cursor-pointer hover:text-black hover:bg-white bg-red-600 py-1 px-4 rounded-xl">
+                BOOK EYE EXAM
+              </li>
+            </Link>
           </ul>
         </nav>
       </header>

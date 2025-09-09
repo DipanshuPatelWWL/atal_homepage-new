@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function InsuranceClaimForm() {
   const [formData, setFormData] = useState({
@@ -54,7 +55,16 @@ export default function InsuranceClaimForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Submitting insurance claim:", formData);
-    alert("Form ready to submit. Replace with API call.");
+    Swal.fire({
+      toast: true,
+      position: "top-end",
+      icon: "info",
+      title: "Form submitted",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    });
+    // alert("Form ready to submit. Replace with API call.");
   };
 
   return (

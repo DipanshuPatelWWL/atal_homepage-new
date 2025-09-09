@@ -1,5 +1,4 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-// import logo from '../assets/image/logo.png'
 export default function Dashboardlayout() {
     const location = useLocation();
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API from "../../API/Api";
+import Swal from "sweetalert2";
 
 function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -59,7 +60,16 @@ function Register() {
         e.preventDefault();
 
         if (form.password !== confirmPassword) {
-            alert("Passwords do not match.");
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "error",
+                title: "Passwords do not match.",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+            // alert("Passwords do not match.");
             return;
         }
 
@@ -98,8 +108,16 @@ function Register() {
                 data,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
-
-            alert("Registration successful!");
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Registration successful!",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+            // alert("Registration successful!");
             // console.log(res.data);
 
             // reset
@@ -129,7 +147,16 @@ function Register() {
         } catch (err) {
             console.error(err);
             const msg = err?.response?.data?.message || "Registration failed. Please try again.";
-            alert(msg);
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "info",
+                title: msg,
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+            });
+            // alert(msg);
         }
     };
 
