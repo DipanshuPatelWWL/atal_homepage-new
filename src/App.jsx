@@ -24,6 +24,7 @@ import DocumentUploadForm from "./page/form/DocumentUploadForm";
 import Checkout from "./page/checkout/Checkout";
 import OrderPlaced from "./page/order/OrderPlaced";
 import Register from "./page/register/Register";
+import Services from "./components/Services";
 
 //  ProtectedRoute
 import ProtectedRoute from "./page/protectedRoute/ProtectedRoute";
@@ -99,6 +100,14 @@ function App() {
         {
           path: "/form-new",
           element: <DocumentUploadForm />,
+        },
+        {
+          path:"/about",
+          element:<About/>
+        },
+        {
+          path:"/services",
+          element:<Services/>
         },
         {
           path: "/place-order",

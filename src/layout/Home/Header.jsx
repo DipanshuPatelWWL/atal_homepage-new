@@ -63,8 +63,8 @@ function Header() {
   };
 
   const handleWishlist = () => {
-    navigate("/wishlist-page")
-  }
+    navigate("/wishlist-page");
+  };
 
   return (
     <>
@@ -108,7 +108,10 @@ function Header() {
 
           {/* Icons */}
           <div className="flex items-center gap-6 text-2xl">
-            <FaHeart onClick={handleWishlist} className="text-red-600 cursor-pointer hover:text-black" />
+            <FaHeart
+              onClick={handleWishlist}
+              className="text-red-600 cursor-pointer hover:text-black"
+            />
 
             {/* Cart */}
             <div className="relative">
@@ -154,8 +157,12 @@ function Header() {
             <Link to="/">
               <li className="cursor-pointer hover:text-red-600">HOME</li>
             </Link>
-            <li className="cursor-pointer hover:text-red-600">ABOUT US</li>
-            <li className="cursor-pointer hover:text-red-600">SERVICES</li>
+            <Link to="/about">
+              <li className="cursor-pointer hover:text-red-600">ABOUT US</li>
+            </Link>
+            <Link to="/services">
+              <li className="cursor-pointer hover:text-red-600">SERVICES</li>
+            </Link>
             <li className="cursor-pointer hover:text-red-600">PROMOTION</li>
             <li className="cursor-pointer hover:text-red-600">CATEGORY</li>
             <li className="cursor-pointer hover:text-red-600">CONTACT US</li>
@@ -190,8 +197,9 @@ function Header() {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-full bg-black text-white transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 z-50 text-center`}
+        className={`fixed top-0 left-0 h-full w-full bg-black text-white transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 z-50 text-center`}
       >
         <div className="flex justify-between items-center p-4 border-b border-gray-700">
           <h2 className="text-lg font-bold">Menu</h2>
@@ -209,8 +217,21 @@ function Header() {
           >
             HOME
           </Link>
-          <li className="cursor-pointer hover:text-red-600">ABOUT US</li>
-          <li className="cursor-pointer hover:text-red-600">SERVICES</li>
+          <Link
+            to="/about"
+            onClick={() => setSidebarOpen(false)}
+            className="cursor-pointer hover:text-red-600"
+          >
+            ABOUT US
+          </Link>
+          
+          <Link
+            to="/services"
+            onClick={() => setSidebarOpen(false)}
+            className="cursor-pointer hover:text-red-600"
+          >
+            SERVICES
+          </Link>
           <li className="cursor-pointer hover:text-red-600">PROMOTION</li>
           <li className="cursor-pointer hover:text-red-600">CATEGORY</li>
           <li className="cursor-pointer hover:text-red-600">CONTACT US</li>
