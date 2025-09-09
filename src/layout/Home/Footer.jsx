@@ -1,6 +1,7 @@
 import React from 'react'
 import { MdEmail } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -26,26 +27,27 @@ const Footer = () => {
                         <div><MdEmail className="text-3xl" /></div>
                         <div className="text-2xl">Email</div>
                     </div>
-                    <div className="mt-1 text-lg">info.ataloptical@gmail.com</div>
+                    <div className="mt-1 text-lg">
+                        <a
+                            href="mailto:info@ataloptical.ca"
+                            className="hover:underline cursor-pointer"
+                        >
+                            info@ataloptical.ca
+                        </a>
+                    </div>
                 </div>
 
                 {/* Box 2 - Useful Links */}
                 <div>
                     <h3 className="text-red-600 text-2xl font-semibold mb-2">Useful Links</h3>
                     <ul className="space-y-1">
-                        {[
-                            "Home",
-                            "About",
-                            "Services",
-                            "Privacy-Policy",
-                            "Book Eye Exam",
-                            "FAQ",
-                            "Contact Us"
-                        ].map(link => (
-                            <li key={link}>
-                                <a href="privacy-policy" className="text-white hover:text-red-600 hover:underline text-lg">{link}</a>
-                            </li>
-                        ))}
+                        <Link to="/"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">HOME</li></Link>
+                        <Link to="/about"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">ABOUT</li></Link>
+                        <Link to="/services"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">SERVICES</li></Link>
+                        <Link to="/privacy-policy"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">PRIVACY-POLICY</li></Link>
+                        <Link to="/eye-exam"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">BOOK EYE EXAM</li></Link>
+                        <Link to="/faq"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">FAQ</li></Link>
+                        <Link to="/contact-us"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg">CONTACT US</li></Link>
                     </ul>
                 </div>
 
@@ -53,19 +55,15 @@ const Footer = () => {
                 <div>
                     <h3 className="text-red-600 text-2xl font-semibold mb-2">Our Services</h3>
                     <ul className="space-y-1">
-                        {[
-                            "Optometrists",
-                            "Eye Exam",
-                            "Eye Glasses",
-                            "Contact Lenses",
-                            "Insurance Claims",
-                            "Blue Light Technology",
-                            "Safety Glasses"
-                        ].map(service => (
-                            <li key={service}>
-                                <a href="#" className="text-white hover:text-red-600 hover:underline text-lg">{service}</a>
-                            </li>
-                        ))}
+
+
+                        <Link to=""><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">OPTOMETRISTS</li></Link>
+                        <Link to="/disclaimer"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">DISCLAIMER</li></Link>
+                        <Link to="/general-info"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">GENERAL INFORMATION</li></Link>
+                        <Link to="/eyeglasses-contact-policy"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">EYE GLASSES CONTACT POLICY</li></Link>
+                        <Link to="/liability"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">LIMITAIONS OF LIABILITY</li></Link>
+                        <Link to="/RightsEnforcementPolicy"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">RIGHT ENFORCEMENT POLICY</li></Link>
+                        <Link to="/termsandconditon"><li className="cursor-pointer hover:text-red-600 hover:underline text-lg hover:underline text-lg">TERMS & CONDITION</li></Link>
                     </ul>
                 </div>
 

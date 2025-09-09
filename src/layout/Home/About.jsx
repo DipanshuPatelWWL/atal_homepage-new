@@ -10,6 +10,7 @@ const About = () => {
         backgroundImage: `url(${bgimage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
+        // height: "100vh",
       }}
     >
       <div className="flex flex-col lg:flex-row items-center justify-between px-6 md:py-12 md:max-w-7xl mx-auto">

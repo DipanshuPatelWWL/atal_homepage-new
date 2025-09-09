@@ -66,7 +66,7 @@ const TermsAndConditions = () => {
 
             {/* Example for Shipping Section */}
             <div className="mb-8">
-              <h2 className="text-xl font-semibold"> 6. Shipping & Delivery</h2>
+              <h2 className="text-xl font-semibold"> 4. Shipping & Delivery</h2>
               <p className="text-gray-600 mt-2 leading-relaxed">
                 We offer delivery to Canadian addresses within a maximum of 30
                 days, subject to unforeseen delays.
@@ -75,7 +75,7 @@ const TermsAndConditions = () => {
 
             {/* Contact Info */}
             <div className="">
-              <h2 className="text-xl font-semibold">7. Contact Us</h2>
+              <h2 className="text-xl font-semibold">5. Contact Us</h2>
               <p className="text-gray-600 mt-2">
                 Email:{" "}
                 <a
